@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <form id="upload" method="post" enctype="multipart/form-data" class="upload-btn-wrapper">
+      {% csrf_token %}
+
+      <input type="file" placeholder="Обзор" name="audio" >
+
+      <button type="submit" class="btn">Загрузить</button>
+    </form>
+
+
+
+  {% if not_audio %}
+    <p class="error">{{not_audio}}</p>
+  {% endif %}
+
+  {% if spectogram_url %}
+    <img src="{{ spectogram_url }}" width="100%" height="100%"></p>
+  {% endif %}
+
+  {% if uploaded_file_url %}
+    <p>Путь до аудиофайла: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+    <p>Путь до спектрограммы: <a href="{{ spectogram_url }}">{{ spectogram_url }}</a></p>
+  {% endif %}
+</div>
+
+{% endblock %}
